@@ -39,14 +39,14 @@
       const btn = $("button[type=submit]", f), label = btn.textContent;
       btn.disabled = true; btn.textContent = "Sending…"; error.hidden = true;
       try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: f.dataset.formKey, from_name: "Pismo Vitality Website",
-            subject: `${f.dataset.subject}: ${name.trim()}${fields.treatment ? ` (${fields.treatment})` : ""}`,
-            ...fields,
-          }),
-        });
+        // Sent as plain form data (no JSON content type) so the browser skips the CORS preflight.
+        const body = new FormData();
+        Object.entries({
+          access_key: f.dataset.formKey, from_name: "Pismo Vitality Website",
+          subject: `${f.dataset.subject}: ${name.trim()}${fields.treatment ? ` (${fields.treatment})` : ""}`,
+          ...fields,
+        }).forEach(([k, v]) => body.append(k, v));
+        const res = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body });
         if (!(await res.json()).success) throw new Error("not sent");
       } catch {
         error.hidden = false; return;
