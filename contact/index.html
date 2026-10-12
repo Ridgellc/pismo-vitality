@@ -37,7 +37,7 @@
   <button class="btn" data-request>Request Appointment</button>
 </div><div class="info-card">
   <h2 style="font-size:1.6rem">Contact us online!</h2>
-  <form id="contact-form" data-preview-form data-done="contact-done" novalidate><div class="form-grid">
+  <form id="contact-form" data-preview-form data-done="contact-done"  novalidate><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none"><div class="form-grid">
     <div class="field full"><label for="c-name">Full Name</label><input id="c-name" name="name" autocomplete="name" required></div>
     <div class="field"><label for="c-phone">Phone Number</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" required></div>
     <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email"></div>
@@ -46,7 +46,7 @@
       <label><input type="radio" name="contact" value="Email"><span>Email</span></label></div></fieldset>
     <div class="field full"><label for="c-notes">Comments</label><textarea id="c-notes" name="comments"></textarea>
       <p class="form-note">Please don't include personal medical information.</p></div>
-  </div><div class="form-actions"><button class="btn" type="submit">Submit</button></div></form>
+  </div><div class="form-actions"><button class="btn" type="submit">Submit</button></div><p class="form-error" role="alert" hidden>Sorry, that didn't go through. Please try again or call us at <a href="tel:+18057730707">(805) 773-0707</a>.</p></form>
   <div class="form-done" id="contact-done" hidden><div class="check">✓</div><h3>Thank you<span class="done-name"></span>!</h3>
     <p>We'll be in touch soon.</p><p><span class="form-preview">Website preview: this form isn't connected to the office yet.</span></p></div>
 </div></div></section>
@@ -70,7 +70,7 @@
     <button class="modal-close" data-close-request aria-label="Close">×</button>
   </div>
   <div class="modal-body">
-    <form id="request-form" data-preview-form data-done="request-done" novalidate>
+    <form id="request-form" data-preview-form data-done="request-done"  novalidate><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
       <div class="form-grid">
         <div class="field full"><label for="rq-name">Full name</label><input id="rq-name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="rq-phone">Phone number</label><input id="rq-phone" name="phone" type="tel" autocomplete="tel" required></div>
@@ -87,7 +87,7 @@
         <div class="field full"><label for="rq-notes">Comments</label><textarea id="rq-notes" name="comments"></textarea>
           <p class="form-note">Please don't include personal medical information. We'll go over everything at your consultation.</p></div>
       </div>
-      <div class="form-actions"><button class="btn" type="submit">Send request</button></div>
+      <div class="form-actions"><button class="btn" type="submit">Send request</button></div><p class="form-error" role="alert" hidden>Sorry, that didn't go through. Please try again or call us at <a href="tel:+18057730707">(805) 773-0707</a>.</p>
     </form>
     <div class="form-done" id="request-done" hidden>
       <div class="check">✓</div><h3>Thank you<span class="done-name"></span>!</h3>

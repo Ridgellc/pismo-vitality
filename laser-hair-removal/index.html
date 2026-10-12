@@ -64,7 +64,7 @@
     <button class="modal-close" data-close-request aria-label="Close">×</button>
   </div>
   <div class="modal-body">
-    <form id="request-form" data-preview-form data-done="request-done" novalidate>
+    <form id="request-form" data-preview-form data-done="request-done"  novalidate><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
       <div class="form-grid">
         <div class="field full"><label for="rq-name">Full name</label><input id="rq-name" name="name" autocomplete="name" required></div>
         <div class="field"><label for="rq-phone">Phone number</label><input id="rq-phone" name="phone" type="tel" autocomplete="tel" required></div>
@@ -81,7 +81,7 @@
         <div class="field full"><label for="rq-notes">Comments</label><textarea id="rq-notes" name="comments"></textarea>
           <p class="form-note">Please don't include personal medical information. We'll go over everything at your consultation.</p></div>
       </div>
-      <div class="form-actions"><button class="btn" type="submit">Send request</button></div>
+      <div class="form-actions"><button class="btn" type="submit">Send request</button></div><p class="form-error" role="alert" hidden>Sorry, that didn't go through. Please try again or call us at <a href="tel:+18057730707">(805) 773-0707</a>.</p>
     </form>
     <div class="form-done" id="request-done" hidden>
       <div class="check">✓</div><h3>Thank you<span class="done-name"></span>!</h3>

@@ -24,12 +24,36 @@
   $$("[data-close-request]").forEach(b => b.addEventListener("click", () => modal.close()));
   modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
 
-  // Forms: this preview isn't connected to email yet, so show the confirmation only.
-  $$("form[data-preview-form]").forEach(f => f.addEventListener("submit", e => {
+  // Forms: with a Web3Forms key the request is emailed to the office; without one
+  // (the preview) it only shows the confirmation.
+  $$("form[data-preview-form]").forEach(f => f.addEventListener("submit", async e => {
     e.preventDefault();
     if (!f.reportValidity()) return;
     const done = document.getElementById(f.dataset.done);
+    const error = $(".form-error", f);
     const name = (f.querySelector("[name=name]") || {}).value || "";
+    if (f.dataset.formKey) {
+      const fields = {};
+      new FormData(f).forEach((v, k) => { fields[k] = fields[k] ? `${fields[k]}, ${v}` : v; });
+      if (fields.botcheck) return;
+      const btn = $("button[type=submit]", f), label = btn.textContent;
+      btn.disabled = true; btn.textContent = "Sending…"; error.hidden = true;
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: f.dataset.formKey, from_name: "Pismo Vitality Website",
+            subject: `${f.dataset.subject}: ${name.trim()}${fields.treatment ? ` (${fields.treatment})` : ""}`,
+            ...fields,
+          }),
+        });
+        if (!(await res.json()).success) throw new Error("not sent");
+      } catch {
+        error.hidden = false; return;
+      } finally {
+        btn.disabled = false; btn.textContent = label;
+      }
+    }
     const first = name.trim().split(/\s+/)[0];
     $(".done-name", done).textContent = first ? `, ${first}` : "";
     f.hidden = true; done.hidden = false; f.reset();

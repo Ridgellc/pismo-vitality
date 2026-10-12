@@ -248,6 +248,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; min-width: 0; }
 .form-done { text-align: center; padding: 1.5rem .5rem; }
 .form-done .check { width: 64px; height: 64px; border-radius: 50%; background: var(--sky); color: var(--blue); display: grid; place-items: center; margin: 0 auto 1rem; font-size: 2rem; }
 .form-preview { font-size: .8rem; color: #5a3f00; background: #fff4d6; border-radius: 8px; padding: .4rem .7rem; display: inline-block; }
+.form-error { margin: .8rem 0 0; color: #a3271f; font-size: .9rem; font-weight: 600; }
 
 /* Footer */
 footer.site { background: #0b2533; color: #b9cdd8; padding: 4rem 0 0; font-size: .94rem; }
