@@ -282,3 +282,6 @@ nav.main > ul { gap: .1rem; }
 .logo small { white-space: nowrap; }
 .btn { white-space: nowrap; }
 .mobile-bar .btn { font-size: .92rem; padding: .8rem .6rem; }
+
+.topbar .tb-links { display: flex; gap: 1.2rem; }
+.btn-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
