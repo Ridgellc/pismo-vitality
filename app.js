@@ -36,10 +36,6 @@
       const fields = {};
       new FormData(f).forEach((v, k) => { fields[k] = fields[k] ? `${fields[k]}, ${v}` : v; });
       if (fields.botcheck) return;
-      if ("stamp" in f.dataset) {   // proof of when notice was given
-        fields.submitted = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "full", timeStyle: "short" }) + " (Pacific)";
-        const st = $(".done-stamp", done); if (st) st.textContent = fields.submitted;
-      }
       const btn = $("button[type=submit]", f), label = btn.textContent;
       btn.disabled = true; btn.textContent = "Sending…"; error.hidden = true;
       try {
@@ -47,7 +43,7 @@
         const body = new FormData();
         Object.entries({
           access_key: f.dataset.formKey, from_name: "Pismo Vitality Website",
-          subject: `${f.dataset.subject}: ${name.trim()}${fields.treatment || fields.request ? ` (${fields.treatment || fields.request}${fields.appointment_date ? ` ${fields.appointment_date}` : ""})` : ""}`,
+          subject: `${f.dataset.subject}: ${name.trim()}${fields.treatment ? ` (${fields.treatment})` : ""}`,
           ...fields,
         }).forEach(([k, v]) => body.append(k, v));
         const res = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { Accept: "application/json" }, body });
