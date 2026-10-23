@@ -24,10 +24,29 @@
   $$("[data-close-request]").forEach(b => b.addEventListener("click", () => modal.close()));
   modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
 
+  // Question modal (any [data-question] opens it; data-treatment preselects the topic)
+  const qModal = $("#question"), qForm = $("#question-form"), qTopic = $("#qs-topic");
+  $$("[data-question]").forEach(b => b.addEventListener("click", e => {
+    e.preventDefault();
+    drawer.classList.remove("open");
+    qForm.hidden = false; $("#question-done").hidden = true;
+    const t = b.dataset.treatment || "General question";
+    if (![...qTopic.options].some(o => o.value === t)) qTopic.add(new Option(t));
+    qTopic.value = t;
+    qModal.showModal();
+    setTimeout(() => $("#qs-name").focus(), 50);
+  }));
+  $$("[data-close-question]").forEach(b => b.addEventListener("click", () => qModal.close()));
+  qModal.addEventListener("click", e => { if (e.target === qModal) qModal.close(); });
+
   // Forms: with a Web3Forms key the request is emailed to the office; without one
   // (the preview) it only shows the confirmation.
   $$("form[data-preview-form]").forEach(f => f.addEventListener("submit", async e => {
     e.preventDefault();
+    if ("needContact" in f.dataset) {  // phone OR email is enough
+      const phone = f.querySelector("[name=phone]");
+      phone.setCustomValidity(phone.value.trim() || f.querySelector("[name=email]").value.trim() ? "" : "Please leave a phone number or an email.");
+    }
     if (!f.reportValidity()) return;
     const done = document.getElementById(f.dataset.done);
     const error = $(".form-error", f);
