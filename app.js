@@ -96,6 +96,14 @@
     show(0); play();
   }
 
+  // "Claim this special" lands on the contact form with the special filled in
+  const cForm = $("#contact-form");
+  if (cForm && new URLSearchParams(location.search).get("claim") === "special") {
+    const notes = $("#c-notes");
+    if (!notes.value) notes.value = `I'd like to claim this month's special: ${cForm.dataset.special}`;
+    setTimeout(() => $("#c-name").focus({ preventScroll: true }), 50);
+  }
+
   // Today's hours
   const today = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][new Date().getDay()];
   $$(".hours tr").forEach(tr => tr.classList.toggle("today", tr.dataset.day === today));

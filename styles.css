@@ -135,7 +135,7 @@ a.chip:hover { border-color: var(--blue); color: var(--blue); }
 
 /* Special */
 .special { background: linear-gradient(120deg, var(--blue-deep), var(--blue)); color: #fff; border-radius: 28px; padding: clamp(2rem, 5vw, 3.2rem); display: grid; gap: 1.4rem; align-items: center; position: relative; overflow: hidden; }
-.special::after { content: ""; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,.08); }
+.special::after { content: ""; pointer-events: none; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,.08); }
 .special h2 { color: #fff; margin: 0; }
 .special .eyebrow { color: #f3d8ad; margin-bottom: .4rem; }
 @media (min-width: 800px) { .special { grid-template-columns: 1fr auto; } }
@@ -190,8 +190,6 @@ a.chip:hover { border-color: var(--blue); color: var(--blue); }
 .prose figure img { border-radius: 16px; }
 .prose .cta-row { margin: 1.8rem 0 2.2rem; }
 .prose .note { font-size: .88rem; color: var(--ink-soft); font-style: italic; }
-.promo { background: var(--sky); border: 1px dashed var(--blue); border-radius: 16px; padding: 1.2rem 1.4rem; margin: 1.6rem 0; }
-.promo code { display: inline-block; font-family: var(--body); font-weight: 800; font-size: 1.25rem; letter-spacing: .08em; background: #fff; color: var(--blue-deep); border-radius: 10px; padding: .2rem .7rem; margin-top: .4rem; }
 .features { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 1rem 0 1.8rem; }
 .feature { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.3rem 1.4rem; }
 .feature h3 { margin: 0 0 .4rem; font-size: 1.2rem; }
@@ -285,3 +283,6 @@ nav.main > ul { gap: .1rem; }
 .btn { white-space: nowrap; }
 .mobile-bar .btn { font-size: .92rem; padding: .8rem .6rem; }
 
+
+/* "Claim this special" jumps here: clear the sticky header and show the form heading */
+#contact-form { scroll-margin-top: 150px; }
